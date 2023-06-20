@@ -29,8 +29,8 @@ class UserDetailView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [EmployeePermission | IsOwner]
 
-    def get(self, request: Request, pk: int) -> Response:
-        user = get_object_or_404(User, pk=pk)
+    def get(self, request: Request, user_id: int) -> Response:
+        user = get_object_or_404(User, user_id=user_id)
         user_serializer = UserSerializer(user)
         return Response(user_serializer.data, status=status.HTTP_200_OK)
 
